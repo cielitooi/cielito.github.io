@@ -1,4 +1,4 @@
-let hydra, hydraCanvas;
+var hydra, hydraCanvas;
 hydraCanvas = document.createElement("canvas");
 hydraCanvas.width = window.innerWidth;
 hydraCanvas.height = window.innerHeight;
@@ -9,6 +9,7 @@ hydra = new Hydra({
   detectAudio: false,
   width: window.innerWidth,
   height: window.innerHeight,
+  makeGlobal: false
 });
 
 document.body.appendChild(hydraCanvas);
@@ -18,9 +19,13 @@ const codeblocks = document.querySelectorAll("code");
 
 let initialized = false;
 
+hydra.eval(`s0.initImage("inari.png")`)
+
+
 for(const cb of codeblocks) {
   if(initialized == false) {
-    eval(cb.textContent);
+    console.log(`{${cb.textContent}}`);
+    hydra.eval(`${cb.textContent}`);
     initialized = true;
   }
 
@@ -31,9 +36,9 @@ for(const cb of codeblocks) {
       // solid(0,0,0,0).out(o1)
       // solid(0,0,0,0).out(o2)
       // solid(0,0,0,0).out(o3)
-      render(o0);
+      // render(o0);
       setTimeout(()=>{
-        eval(cb.textContent)
+        hydra.eval(`${cb.textContent}`);
       }, 60);
     }
   }, { threshold: [0.07] });
