@@ -1,99 +1,188 @@
-<!DOCTYPE html><html><head>
-    <script src="p5.min.js"></script>
-    <script src="p5.dom.min.js"></script>
-    <script src="p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8">
-<style type='text/css'>
-    body {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, #e5e5e5, #8281f6, #c1b8c8, #b9e6ff);
-        background-size: 200% 100%;
-        -webkit-animation: Gradient 20s ease infinite;
-        -moz-animation: Gradient 20s ease infinite;
-        animation: Gradient 20s ease infinite;
-    }
-
-    @-webkit-keyframes Gradient {
-        0% {
-            background-position: 0% 50%
-        }
-
-        50% {
-            background-position: 100% 50%
-        }
-
-        100% {
-            background-position: 0% 50%
-        }
-    }
-
-    @-moz-keyframes Gradient {
-        0% {
-            background-position: 0% 50%
-        }
-
-        50% {
-            background-position: 100% 50%
-        }
-
-        100% {
-            background-position: 0% 50%
-        }
-    }
-
-    @keyframes Gradient {
-        0% {
-            background-position: 0% 50%
-        }
-
-        50% {
-            background-position: 100% 50%
-        }
-
-        100% {
-            background-position: 0% 50%
-        }
-    }
-    </style>
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <title>calma en el alma</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- import the latest version of hydra synth-->
+    <script src="https://unpkg.com/hydra-synth"></script>
+    
+    </head>
+  
   <body>
-	<script src="https://unpkg.com/hydra-synth"></script>
-  
+    <script language=javascript>
+     var speed=0.025
+    var downspeed= 0.025
+    var stopspeed= 0
+    var currentpos=0
+    var alt = 0
+    var curpos1 = 100
+    var curpos2 = 1
+    function initialize(){
+    startit()
+    }
+    function goup(e) {
+    speed = stopspeed
+    }
+    function godown(e) {
+    speed = downspeed
+    }
+    function scrollwindow(){
+    if (document.all) {
+    temp=document.body.scrollDown;
+    }
+    else {
+    temp=window.pageYOffset;
+    }
+    if (alt==0) {
+    alt=1;
+    curpos2 = temp;
+    }
+    else {
+    alt=0;
+    curpos1 = temp;
+    }
+    if ((curpos1==curpos2) && (speed > 0)) {
+    currentpos = 0;
+    curpos1 = 200;
+    }
+    else {
+    if (document.all) {
+    currentpos=document.body.scrollDown+speed;
+    }
+    else {
+    currentpos=window.pageYOffset+speed;
+    }
+    }
+    if (speed > 0) { window.scrollTo(0,currentpos); }
+    setTimeout("scrollwindow()", 12);
+    }
+    function startit(){
+    setTimeout("scrollwindow()", 12)
+    }
+    window.onload=initialize
+    // document.onmousedown = goup;
+    // document.ondblclick = godown;
+
+    </script>
 
 
-<script>
-      // create a new hydra-synth instance
-      var hydra = new Hydra({
-        canvas: document.getElementById("myCanvas")
-      })
+    
+    <div id="main">
       
-//osc(10, 0.002, 1).luma(0.5, 0.01).out()
-  
+      <!--<h1>hydra inside a webpage</h1>-->
+      <div class="spacer-small"></div>
+      <!--<p>↓continue scrolling↓</p>-->
+      
+     
+      <code>
+      
 s0.initImage("inari.png")
 
 
 
 src(s0)
-		//.thresh(0.1)
-		.add(noise(5, 0.03)
-			.color(0,0.27,2,0)
-			.scale(0.8,[1.25],()=>window.innerWidth/window.innerHeight))
-		.contrast(2).luma(0.25, 0.25)
-		.modulate(o0, () => 0.062)
-		//.luma(0.5, 0.1)
-		.scale(0.99, 0.99)
-		.pixelate(100*8, 50*8)
+    //.thresh(0.1)
+    .add(noise(5, 0.03)
+      .color(0,0.1,0,0)
+      .scale(0.8,[1.25],()=>window.innerWidth/window.innerHeight))
+    .contrast(2).luma(0.25, 0.25)
+    .modulate(o0, () => 0.062)
+    //.luma(0.5, 0.1)
+    .scale(0.99, 0.99)
+    .pixelate(100*10, 50*10)
 
 .out()
 
 
 
-    </script> 
- 
 
-    <!--<script src="sketch.js"></script>
--->
+      </code>
+
+
+      <div class="spacer"></div>
+      
+      <code>
+s0.initImage("inari.png")
+
+
+
+src(s0)
+    //.thresh(0.1)
+    .add(noise(6, 0.03)
+      .color(0,0.1,0,0)
+      .scale(0.5,[1.15],()=>window.innerWidth/window.innerHeight))
+    .contrast(1.5).luma(0.35, 0.15)
+    .modulate(o0, () => 0.12)
+    //.luma(0.5, 0.1)
+    .scale(0.99, 0.99)
+    //.pixelate(100*10, 50*10)
+
+.out()
+      </code>
+     
+      <div class="spacer"></div>
+     
+      <code>
+      src(o0)
+      .modulateHue(src(o0)
+      .scale(1.12),[1, -5]
+      .fast(0.2))
+      .layer(osc(8,-0.1,2)
+      .rotate(0.27)
+      .mask(shape(4,0.6,1e-6))
+      .repeat(0,5)
+      .scale(4,.06,0.8), 01)
+      .out()
+      
+      </code>
+
+
+            <div class="spacer"></div>
+     
+      <code>
+src(o0)
+    //.modulateHue(src(o0)
+    .scale(11),2)
+    .layer(src(o0).rotate(1.57)
+    .mask(shape(4,0.3,1e-6)).scale(1.5,.006,0.2), 01)
+.out()  
+
+      </code>
+
+
+      <div class="spacer"></div>
+     
+      <code>
+
+
+      src(o0)
+    .modulateHue(src(o0)
+    .scale(11),2)
+    .layer(osc(8,-0.1,0.6).rotate(1.57)
+    .mask(shape(4,0.3,1e-6)).scale(0.2,0.7,()=>window.innerWidth/window.innerHeight).modulateScale(osc(1,0.8).invert(),0.18,0.03), 01)
+.out()  
+      <!-- src(o0)
+      .modulateHue(src(o0)
+      .scale(4),[-3, 6].fast(0.2))
+      .layer(osc(18,-0.1,2).rotate(1.57)
+      .mask(shape(4,0.3,1e-6)).repeat(0,3).scale(4,.06,0.8), 01).out()
+      -->
+      </code>
+
+<div class="spacer"></div>
+
+      
+      <div class="spacer"></div>
+      
+    </div>
+    
+    <script src="./script.js"></script>
+  
+  </body>
 
 </html>
