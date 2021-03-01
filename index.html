@@ -9,8 +9,11 @@
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="style.css" />
     <!-- import the latest version of hydra synth-->
+    <script src="./p5.min.js"></script>
+    <script src="./p5.dom.min.js"></script>
+
     <script src="https://unpkg.com/hydra-synth"></script>
-    
+
     </head>
   
   <body>
@@ -60,7 +63,7 @@
 
     </script>
 
-
+    <div id="p5container"></div>
     
     <div id="main">
       
@@ -71,7 +74,6 @@
      
       <code>
       
-s0.initImage("inari.png")
 
 
 
@@ -81,7 +83,7 @@ src(s0)
       .color(0,0.1,0,0)
       .scale(0.8,[1.25],()=>window.innerWidth/window.innerHeight))
     .contrast(2).luma(0.25, 0.25)
-    .modulate(o0, () => 0.062)
+    .modulate(src(o0), () => 0.062)
     //.luma(0.5, 0.1)
     .scale(0.99, 0.99)
     .pixelate(100*10, 50*10)
@@ -97,7 +99,6 @@ src(s0)
       <div class="spacer"></div>
       
       <code>
-s0.initImage("inari.png")
 
 
 
@@ -107,7 +108,7 @@ src(s0)
       .color(0,0.1,0,0)
       .scale(0.5,[1.15],()=>window.innerWidth/window.innerHeight))
     .contrast(1.5).luma(0.35, 0.15)
-    .modulate(o0, () => 0.12)
+    .modulate(src(o0), () => 0.12)
     //.luma(0.5, 0.1)
     .scale(0.99, 0.99)
     //.pixelate(100*10, 50*10)
@@ -137,7 +138,7 @@ src(s0)
       <code>
 src(o0)
     //.modulateHue(src(o0)
-    .scale(11),2)
+    //.scale(11),2)
     .layer(src(o0).rotate(1.57)
     .mask(shape(4,0.3,1e-6)).scale(1.5,.006,0.2), 01)
 .out()  
@@ -171,6 +172,7 @@ src(o0)
       
     </div>
     
+    <script src="./sketch.js"></script>
     <script src="./script.js"></script>
   
   </body>

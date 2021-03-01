@@ -6,18 +6,18 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1024, 512);
+  createCanvas(1024, 512).parent("#p5container");
 
+  // makeDithered(kitten, 2);
 }
 
 function draw() {
 
 tamango++;
-   makeDithered(kitten, 2);
 
   image(kitten, 0, 0);
   // Apply gray filter to the whole canvas
-  filter(PINK);
+  // filter(PINK);
 
 if (tamango >= 106) {
 	tamango = 1;
